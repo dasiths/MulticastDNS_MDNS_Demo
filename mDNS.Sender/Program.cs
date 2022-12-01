@@ -1,4 +1,5 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿// Demo using https://github.com/richardschneider/net-mdns
+// code based off https://github.com/richardschneider/net-mdns/blob/master/Spike/Program.cs
 
 using Common.Logging;
 using Makaretu.Dns;
@@ -16,14 +17,14 @@ mdns.QueryReceived += (s, e) =>
 {
     var names = e.Message.Questions
         .Select(q => q.Name + " " + q.Type);
-    Console.WriteLine($"got a query for {String.Join(", ", names)}");
+    Console.WriteLine($"got a query for {string.Join(", ", names)}");
 };
 mdns.AnswerReceived += (s, e) =>
 {
     var names = e.Message.Answers
         .Select(q => q.Name + " " + q.Type)
         .Distinct();
-    Console.WriteLine($"got answer for {String.Join(", ", names)}");
+    Console.WriteLine($"got answer for {string.Join(", ", names)}");
 };
 mdns.NetworkInterfaceDiscovered += (s, e) =>
 {
